@@ -1,0 +1,10 @@
+GET localhost:8080/talk
+
+###
+
+POST localhost:8080/talk
+Content-Type: application/json
+
+{
+  "name": "Kotlin & GraalVM"
+}
