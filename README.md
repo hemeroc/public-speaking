@@ -1,7 +1,7 @@
 # Public Speaking
 
 All demos and examples of my public talks.  
-You can find the slides on my [LinkedIn](https://www.linkedin.com/in/moser-dominik/details/experience/).  
+You can find the slides on my [LinkedIn](https://www.linkedin.com/in/moser-dominik/details/experience/) and in the GitHub [release section](https://github.com/hemeroc/public-speaking/releases).
 
 **Disclaimer:**
 
