@@ -11,3 +11,4 @@ Although carefully crafted, all demos and examples should not be used directly i
 
 * [Kotlin Vienna Meetup](./kotlin-vienna-meetup/)
   * [Kotlin & GraalVM](./kotlin-vienna-meetup/graalvm/)
+  * [Kotlin & Project Panama](./kotlin-vienna-meetup/panama/)
