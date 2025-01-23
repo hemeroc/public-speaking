@@ -7,9 +7,9 @@ import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses
 import com.tngtech.archunit.library.Architectures.layeredArchitecture
 
-
 @AnalyzeClasses(packages = ["com.github.hemeroc.publicspeaking.archtest"])
 internal class ArchitectureTest {
+
     @ArchTest
     fun `service components should only be used in application and service packages`(importedClasses: JavaClasses) {
         val inlineRule = classes()
@@ -21,7 +21,7 @@ internal class ArchitectureTest {
     @ArchTest
     fun `concrete io components should only be accessed in the application package`(importedClasses: JavaClasses) {
         classes()
-            .that().resideInAPackage("..io.impl..")
+            .that().resideInAPackage("..io.impl..").or().resideInAPackage("..service.impl..")
             .should().onlyBeAccessed().byAnyPackage("..application..")
             .check(importedClasses)
     }
@@ -36,24 +36,27 @@ internal class ArchitectureTest {
     @ArchTest
     fun `ensure that architecture layers are not mixed`(importedClasses: JavaClasses) {
         LAYERS
-            .whereLayer(MAIN).mayNotBeAccessedByAnyLayer()
-            .whereLayer(SERVICE).mayOnlyBeAccessedByLayers(MAIN, SERVICE)
-            .whereLayer(IO).mayOnlyBeAccessedByLayers(MAIN, SERVICE)
-            .whereLayer(IO_IMPL).mayOnlyBeAccessedByLayers(MAIN)
+            .whereLayer(APPLICATION).mayNotBeAccessedByAnyLayer()
+            .whereLayer(SERVICE).mayOnlyBeAccessedByLayers(APPLICATION, SERVICE)
+            .whereLayer(IO).mayOnlyBeAccessedByLayers(APPLICATION, SERVICE)
+            .whereLayer(IO_IMPL).mayOnlyBeAccessedByLayers(APPLICATION)
+            .whereLayer(SERVICE_IMPL).mayOnlyBeAccessedByLayers(APPLICATION)
             .check(importedClasses)
     }
 }
 
 const val SERVICE = "Service"
+const val SERVICE_IMPL = "ServiceImpl"
 const val IO = "IO"
 const val IO_IMPL = "IOImpl"
 const val MODEL = "Model"
-const val MAIN = "Main"
+const val APPLICATION = "Application"
 
 private val LAYERS = layeredArchitecture()
     .consideringAllDependencies()
     .layer(SERVICE).definedBy("..service..")
+    .layer(SERVICE_IMPL).definedBy("..service.impl..")
     .layer(IO).definedBy("..io..")
     .layer(IO_IMPL).definedBy("..io.impl..")
     .layer(MODEL).definedBy("..model..")
-    .layer(MAIN).definedBy("..application..")
+    .layer(APPLICATION).definedBy("..application..")
