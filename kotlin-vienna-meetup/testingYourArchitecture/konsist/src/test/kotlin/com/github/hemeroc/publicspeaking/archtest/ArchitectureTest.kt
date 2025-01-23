@@ -18,6 +18,16 @@ internal class ArchitectureTest {
 
     @Test
     fun `concrete service components should only be accessed in the application package`() {
+        Konsist
+            .scopeFromProject()
+            .classes()
+            .filter { it.resideOutsidePackage("..application..") }
+            .assertTrue {
+                it.containingFile.hasAllImports { import ->
+                    //...
+                    true
+                }
+            }
     }
 
     @Test
