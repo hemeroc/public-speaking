@@ -10,14 +10,3 @@ interface SentenceReader {
 interface MessageWriter {
     fun write(message: Message)
 }
-
-
-class CommandlineSentenceReader : SentenceReader {
-    override fun read() =
-        Sentence(readlnOrNull() ?: "")
-}
-
-class CommandlineMessageWriter : MessageWriter {
-    override fun write(message: Message) =
-        print(message.value)
-}

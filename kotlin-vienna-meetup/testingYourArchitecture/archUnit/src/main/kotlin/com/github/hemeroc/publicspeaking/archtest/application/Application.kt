@@ -1,7 +1,7 @@
 package com.github.hemeroc.publicspeaking.archtest.application
 
-import com.github.hemeroc.publicspeaking.archtest.io.CommandlineMessageWriter
-import com.github.hemeroc.publicspeaking.archtest.io.CommandlineSentenceReader
+import com.github.hemeroc.publicspeaking.archtest.io.impl.CommandlineMessageWriter
+import com.github.hemeroc.publicspeaking.archtest.io.impl.CommandlineSentenceReader
 import com.github.hemeroc.publicspeaking.archtest.io.MessageWriter
 import com.github.hemeroc.publicspeaking.archtest.io.SentenceReader
 import com.github.hemeroc.publicspeaking.archtest.model.Message
