@@ -1,0 +1,8 @@
+[versions]
+kotlin = "2.1.0"
+
+[libraries]
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+konsist = { module = "com.lemonappdev:konsist", version = "0.17.3" }
+archUnit-jUnit5 = { module = "com.tngtech.archunit:archunit-junit5", version = "1.3.0" }
+jMolecules-layered = { module = "org.jmolecules:jmolecules-layered-architecture", version = "1.10.0" }

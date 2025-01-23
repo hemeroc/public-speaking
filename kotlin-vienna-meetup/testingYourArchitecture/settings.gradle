@@ -1,0 +1,10 @@
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+include(":archUnit")
+include(":konsist")
+
+rootProject.name = "testingYourArchitecture"
