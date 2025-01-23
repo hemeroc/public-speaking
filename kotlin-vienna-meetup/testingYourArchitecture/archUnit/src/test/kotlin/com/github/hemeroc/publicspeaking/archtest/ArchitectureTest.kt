@@ -3,6 +3,7 @@ package com.github.hemeroc.publicspeaking.archtest
 import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.junit.AnalyzeClasses
 import com.tngtech.archunit.junit.ArchTest
+import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes
 
 
@@ -24,8 +25,9 @@ internal class ArchitectureTest {
 
     @ArchTest
     fun `io should not dependent on other io`(importedClasses: JavaClasses) {
-        classes().that().resideInAPackage("..io..")
-            .should().onlyBeAccessed().byClassesThat().resideOutsideOfPackage("..io..")
+        ArchRuleDefinition.noClasses().that().resideInAPackage("..io.impl..")
+            .should().dependOnClassesThat().resideInAPackage("..io.impl..")
+            .check(importedClasses)
     }
 }
 
