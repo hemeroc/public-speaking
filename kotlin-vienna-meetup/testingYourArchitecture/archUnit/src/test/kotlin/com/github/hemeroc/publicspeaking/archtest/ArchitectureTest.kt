@@ -38,13 +38,15 @@ internal class ArchitectureTest {
         LAYERS
             .whereLayer(MAIN).mayNotBeAccessedByAnyLayer()
             .whereLayer(SERVICE).mayOnlyBeAccessedByLayers(MAIN, SERVICE)
-            .whereLayer(IO).mayOnlyBeAccessedByLayers(MAIN)
+            .whereLayer(IO).mayOnlyBeAccessedByLayers(MAIN, SERVICE)
+            .whereLayer(IO_IMPL).mayOnlyBeAccessedByLayers(MAIN)
             .check(importedClasses)
     }
 }
 
 const val SERVICE = "Service"
 const val IO = "IO"
+const val IO_IMPL = "IOImpl"
 const val MODEL = "Model"
 const val MAIN = "Main"
 
@@ -52,5 +54,6 @@ private val LAYERS = layeredArchitecture()
     .consideringAllDependencies()
     .layer(SERVICE).definedBy("..service..")
     .layer(IO).definedBy("..io..")
+    .layer(IO_IMPL).definedBy("..io.impl..")
     .layer(MODEL).definedBy("..model..")
     .layer(MAIN).definedBy("..application..")
