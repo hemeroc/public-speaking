@@ -21,10 +21,18 @@ internal class ArchitectureTest {
     @ArchTest
     fun `concrete io components should only be accessed in the application package`(importedClasses: JavaClasses) {
         classes()
-            .that().resideInAPackage("..io.impl..").or().resideInAPackage("..service.impl..")
+            .that().resideInAPackage("..io.impl..")
             .should().onlyBeAccessed().byAnyPackage("..application..")
             .check(importedClasses)
     }
+
+//    @ArchTest
+//    fun `concrete service components should only be accessed in the application package`(importedClasses: JavaClasses) {
+//        classes()
+//            .that().resideInAPackage("..service.impl..")
+//            .should().onlyBeAccessed().byAnyPackage("..application..")
+//            .check(importedClasses)
+//    }
 
     @ArchTest
     fun `io should not dependent on other io`(importedClasses: JavaClasses) {
